@@ -9,8 +9,7 @@ h3 {
 
 body {
     background-image: url('../img/background.png');
-    background-size: auto;
-    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
 }
 

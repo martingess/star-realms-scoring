@@ -1,9 +1,8 @@
-let influence = document.getElementById("playerOneInfluence"),
+let influence = document.querySelectorAll(".playerInfluence"),
     add = document.getElementById("playerOneScore"),
-    btnSendFirstResults = document.getElementById("sendResults"),
-    hpBarCurrent = document.getElementById("hpBarCurrent"),
+    sendResults = document.querySelectorAll(".sendResults"),
+    hpBarCurrent = document.querySelectorAll('.hpBar'),
     startInfluence = window.localStorage.getItem('startInfluence'),
-    startHpBars = document.getElementsByClassName("hpBar"),
     playerSections = document.querySelectorAll(".playerField"),
     numberOfPlayers = window.localStorage.getItem("numberOfPlayers"),
     returnOldBtns = document.querySelectorAll('.returnOld'),
@@ -36,40 +35,47 @@ function playerNamesUpdate(playersNamesArray) {
 }
 playerNamesUpdate(playersNames);
 
+
+class User {
+    constructor(playerNumber){
+        
+    }
+}
+
 //Данные игроков
 let playerOne = {
     name: playersNames[0],
-    currentInfluence: document.getElementById("playerOneInfluence"),
+    currentInfluence: influence[0],
     addInfluence: playersAddInfluenceInput[0],
-    influenceBar: document.getElementById("hpBarCurrent1"),
-    btnSendResults: document.getElementById("sendResults1"),
+    influenceBar: hpBarCurrent[0],
+    btnSendResults: sendResults[0],
     oldParam: startInfluence
 
 }
 let playerTwo = {
     name: playersNames[1],
-    currentInfluence: document.getElementById("playerTwoInfluence"),
+    currentInfluence: influence[1],
     addInfluence: playersAddInfluenceInput[1],
-    influenceBar: document.getElementById("hpBarCurrent2"),
-    btnSendResults: document.getElementById("sendResults2"),
+    influenceBar: hpBarCurrent[1],
+    btnSendResults: sendResults[1],
     oldParam: startInfluence
 
 }
 let playerThree = {
     name: playersNames[2],
-    currentInfluence: document.getElementById("playerThreeInfluence"),
+    currentInfluence: influence[2],
     addInfluence: playersAddInfluenceInput[2],
-    influenceBar: document.getElementById("hpBarCurrent3"),
-    btnSendResults: document.getElementById("sendResults3"),
+    influenceBar: hpBarCurrent[2],
+    btnSendResults: sendResults[2],
     oldParam: startInfluence
 
 }
 let playerFour = {
     name: playersNames[3],
-    currentInfluence: document.getElementById("playerFourInfluence"),
+    currentInfluence: influence[3],
     addInfluence: playersAddInfluenceInput[3],
-    influenceBar: document.getElementById("hpBarCurrent4"),
-    btnSendResults: document.getElementById("sendResults4"),
+    influenceBar: hpBarCurrent[3],
+    btnSendResults: sendResults[3],
     oldParam: startInfluence
 
 }
@@ -82,7 +88,7 @@ function colorHpBars(hpBars) {
 
     }
 }
-colorHpBars(startHpBars)
+colorHpBars(hpBarCurrent);
 
 playerOne.currentInfluence.value = startInfluence;
 playerTwo.currentInfluence.value = startInfluence;
@@ -345,6 +351,7 @@ loadBtn[2].addEventListener("click", (event) => {
 
 saveMenuBtn.addEventListener("click", ()=>{
     saveswrapper.style.display = "flex";
+    saveswrapper.style.marginLeft = "0px";
 });
 closeSavesBtn.addEventListener("click", ()=>{
     saveswrapper.style.display = "none";
