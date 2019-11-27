@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" class="" id="burger-menu-checkbox">
+
+            <label for="burger-menu-checkbox" class="burger-menu-label">
+                <div class="icon nav-icon-6">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </label>
+            <ul class="burger-menu">
+                <li><a href='./index.html'>Настройки</a></li>
+                <li><a href='./saves.html'></a></li>
+                <li>Правила</li>
+                <li id="js-saves-menu-btn">Сохранения</li>
+            </ul>
+        </nav>
+        <div class="header-logo">
+            <img src="./img/logo.png" class="">
+        </div>
+        <p class="header-quote">Из далёких уголков космоса к центральным планетам Звёздных империй регулярно
+            приближаются новые угрозы. Возьмите под своё командование эскадру кораблей, чтобы противостоять различным
+            неведомым чудищам, вселенским аномалиям и прочим необъяснимым ужасам из разных миров.</p>
+    </header>
+    <main>
+        <div class="box">
+            <section id='playerOneSection' class="playerField">
+                <form>
+                    <h3 class="showPlayerNameField">Игрок один:</h3>
+                    <div class="smallRow"></div>
+                    <input value="0" id="playerOneInfluence" class="playerInfluence" readonly>
+                    <div id="hpBarWrapper">
+                        <div id="hpBarCurrent1" class="hpBar"></div>
+                    </div>
+                    <div class="user-influence-input">
+                        <input class="addInfluence">
+                        <button id="sendResults1">✓</button>
+                        <button class="returnOld">↺</button>
+                    </div>
+                </form>
+
+            </section>
+            <section id='playerTwoSection' class="playerField">
+                <form>
+                    <h3 class="showPlayerNameField">Игрок два:</h3>
+                    <div class="smallRow"></div>
+
+                    <input value="0" id="playerTwoInfluence" class="playerInfluence" readonly>
+                    <div id="hpBarWrapper">
+                        <div id="hpBarCurrent2" class="hpBar"></div>
+                    </div>
+                    <div class="user-influence-input">
+
+                    <input class="addInfluence" placeholder="Введите значение"> <button id="sendResults2">✓</button>
+                    <button class="returnOld">↺</button>
+                    </div>
+                </form>
+
+            </section>
+            <section id='playerThreeSection' class="playerField">
+                <form>
+                    <h3 class="showPlayerNameField">Игрок три:</h3>
+                    <div class="smallRow"></div>
+                    <div id="hpBarWrapper">
+                        <div id="hpBarCurrent3" class="hpBar"></div>
+                    </div>
+                    <input value="0" id="playerThreeInfluence" class="playerInfluence" readonly>
+                    <div class="user-influence-input">
+
+                    <input class="addInfluence" placeholder="Введите значение"></<input> <button
+                    
+                    id="sendResults3">✓</button>
+                    <button class="returnOld">↺</button>
+                    </div>
+                </form>
+
+            </section>
+            <section id='playerFourSection' class="playerField">
+                <form>
+                    <h3 class="showPlayerNameField">Игрок четыре:</h3>
+                    <div class="smallRow"></div>
+                    <div id="hpBarWrapper">
+                        <div id="hpBarCurrent4" class="hpBar"></div>
+                    </div>
+                    <input value="0" id="playerFourInfluence" class="playerInfluence" readonly>
+                    <div class="user-influence-input">
+
+                    <input class="addInfluence" placeholder="Введите значение"> <button id="sendResults4"
+                        placeholder="Введите значение">✓</button>
+                    <button class="returnOld">↺</button>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+        <section id="logSection" class="log">
+            <p class='logBody'></p>
+        </section>
+    </main>
+
+    <div class="saves-wrapper">
+        <div class="saves-box">
+            <div class="close-window">
+                <div class="cross-element"></div>
+                <div class="cross-element"></div>
+            </div>
+            <ul class="saves-list">
+                <li class="save-slot">Слот 1 </li><button class="js-save-btn"
+                    class="save-load-btn">Сохранить</button><button class="js-load-btn">Загрузить</button>
+                <li class="save-slot">Слот 2 </li><button class="js-save-btn"
+                    class="save-load-btn">Сохранить</button><button class="js-load-btn">Загрузить</button>
+                <li class="save-slot">Слот 3 Загрузить</button></li><button class="js-save-btn"
+                    class="save-load-btn">Сохранить</button><button class="js-load-btn">Загрузить</button>
+
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="./script/script.js"></script>
+
+</html>
