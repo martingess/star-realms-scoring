@@ -47,10 +47,11 @@ class User {
     }
 }
 
-let playerOne = new User(playersNames[0], influence[0], playersAddInfluenceInput[0], hpBarCurrent[0], sendResults[0]);
-let playerTwo = new User(playersNames[1], influence[1], playersAddInfluenceInput[1], hpBarCurrent[1], sendResults[1]);
-let playerThree = new User(playersNames[2], influence[2], playersAddInfluenceInput[2], hpBarCurrent[2], sendResults[2]);
-let playerFour = new User(playersNames[3], influence[3], playersAddInfluenceInput[3], hpBarCurrent[3], sendResults[3]);
+let players = [];
+
+for (let i = 0; i<4; i++){
+    players[i] = new User(playersNames[i], influence[i], playersAddInfluenceInput[i], hpBarCurrent[i], sendResults[i])
+}
 
 function colorHpBars(hpBars) {
     for (let i = 0; i < hpBars.length; i++) {
@@ -62,51 +63,51 @@ function colorHpBars(hpBars) {
 }
 colorHpBars(hpBarCurrent);
 
-playerOne.currentInfluence.value = startInfluence;
-playerTwo.currentInfluence.value = startInfluence;
-playerThree.currentInfluence.value = startInfluence;
-playerFour.currentInfluence.value = startInfluence;
+players[0].currentInfluence.value = startInfluence;
+players[1].currentInfluence.value = startInfluence;
+players[2].currentInfluence.value = startInfluence;
+players[3].currentInfluence.value = startInfluence;
 
 
 
 //листнеры для кнопок подсчёта
-playerOne.btnSendResults.addEventListener('click', (event) => {
+players[0].btnSendResults.addEventListener('click', (event) => {
     event.preventDefault();
-    makeResult(playerOne)
+    makeResult(players[0]);
 });
-playerTwo.btnSendResults.addEventListener('click', (event) => {
+players[1].btnSendResults.addEventListener('click', (event) => {
     event.preventDefault();
-    makeResult(playerTwo)
+    makeResult(players[1])
 });
-playerThree.btnSendResults.addEventListener('click', (event) => {
+players[2].btnSendResults.addEventListener('click', (event) => {
     event.preventDefault();
-    makeResult(playerThree)
+    makeResult(players[2])
 });
-playerFour.btnSendResults.addEventListener('click', (event) => {
+players[3].btnSendResults.addEventListener('click', (event) => {
     event.preventDefault();
-    makeResult(playerFour)
+    makeResult(players[3])
 });
 
 //вернуть старые результаты лиснтеры
 returnOldBtns[0].addEventListener("click", function (event) {
     event.preventDefault();
-    returnOld(playerOne);
-    hpBarUpdate(playerOne)
+    returnOld(players[0]);
+    hpBarUpdate(players[0])
 })
 returnOldBtns[1].addEventListener("click", function (event) {
     event.preventDefault();
-    returnOld(playerTwo);
-    hpBarUpdate(playerTwo)
+    returnOld(players[1]);
+    hpBarUpdate(players[1])
 })
 returnOldBtns[2].addEventListener("click", function (event) {
     event.preventDefault();
-    returnOld(playerThree);
-    hpBarUpdate(playerThree)
+    returnOld(players[2]);
+    hpBarUpdate(players[2])
 })
 returnOldBtns[3].addEventListener("click", function (event) {
     event.preventDefault();
-    returnOld(playerFour);
-    hpBarUpdate(playerFour);
+    returnOld(players[3]);
+    hpBarUpdate(players[3]);
 })
 
 function returnOld(player) {
@@ -142,7 +143,7 @@ function logUpdate(type, player) {
 
 function hpBarUpdate(player) {
     if (player === 'all'){
-        
+
     }
 
     if ((player.currentInfluence.value / startInfluence) >= 1) {
@@ -185,20 +186,20 @@ checkSave(save3, 2);
 class SavePlayerInfo{
     constructor(){
         this.playerOne = {
-            influence: playerOne.currentInfluence.value,
-            name: playerOne.name
+            influence: players[0].currentInfluence.value,
+            name: players[0].name
         },
         this.playerTwo = {
-            influence: playerTwo.currentInfluence.value,
-            name: playerTwo.name
+            influence: players[1].currentInfluence.value,
+            name: players[1].name
         },
-        this.playerThree = {
-            influence: playerThree.currentInfluence.value,
-            name: playerThree.name
+        this.players[2] = {
+            influence: players[2].currentInfluence.value,
+            name: players[2].name
         },
-        this.playerFour = {
-            influence: playerFour.currentInfluence.value,
-            name: playerFour.name
+        this.players[3] = {
+            influence: players[3].currentInfluence.value,
+            name: players[3].name
         },
         this.numberOfPlayers = numberOfPlayers,
         this.startInfluence = startInfluence,
@@ -228,61 +229,61 @@ saveBtn[2].addEventListener("click", (event) => {
 
 function loadSave(save){
     startInfluence = save.startInfluence;
-    playerOne.currentInfluence.value = save.playerOne.influence;
-    playerTwo.currentInfluence.value = save.playerTwo.influence;
-    playerThree.currentInfluence.value = save.playerThree.influence;
-    playerFour.currentInfluence.value = save.playerFour.influence;
+    players[0].currentInfluence.value = save.players[0].influence;
+    players[1].currentInfluence.value = save.players[1].influence;
+    players[2].currentInfluence.value = save.players[2].influence;
+    players[3].currentInfluence.value = save.players[3].influence;
 }
 
 loadBtn[0].addEventListener("click", (event) => {
     event.preventDefault()
     setNumberOfPlayers(+save1.numberOfPlayers);
     startInfluence = save1.startInfluence;
-    playerOne.currentInfluence.value = save1.playerOne.influence;
-    playerTwo.currentInfluence.value = save1.playerTwo.influence;
-    playerThree.currentInfluence.value = save1.playerThree.influence;
-    playerFour.currentInfluence.value = save1.playerFour.influence;
+    players[0].currentInfluence.value = save1.players[0].influence;
+    players[1].currentInfluence.value = save1.players[1].influence;
+    players[2].currentInfluence.value = save1.players[2].influence;
+    players[3].currentInfluence.value = save1.players[3].influence;
 
     playerNamesUpdate(save1.playersNames)
 
-    hpBarUpdate(playerOne);
-    hpBarUpdate(playerTwo)
-    hpBarUpdate(playerThree)
-    hpBarUpdate(playerFour)
+    hpBarUpdate(players[0]);
+    hpBarUpdate(players[1])
+    hpBarUpdate(players[2])
+    hpBarUpdate(players[3])
 
 })
 loadBtn[1].addEventListener("click", (event) => {
     event.preventDefault()
     setNumberOfPlayers(+save2.numberOfPlayers);
     startInfluence = save2.startInfluence;
-    playerOne.currentInfluence.value = save2.playerOne.influence;
-    playerTwo.currentInfluence.value = save2.playerTwo.influence;
-    playerThree.currentInfluence.value = save2.playerThree.influence;
-    playerFour.currentInfluence.value = save2.playerFour.influence;
+    players[0].currentInfluence.value = save2.players[0].influence;
+    players[1].currentInfluence.value = save2.players[1].influence;
+    players[2].currentInfluence.value = save2.players[2].influence;
+    players[3].currentInfluence.value = save2.players[3].influence;
 
     playerNamesUpdate(save2.playersNames)
 
-    hpBarUpdate(playerOne);
-    hpBarUpdate(playerTwo)
-    hpBarUpdate(playerThree)
-    hpBarUpdate(playerFour)
+    hpBarUpdate(players[0]);
+    hpBarUpdate(players[1])
+    hpBarUpdate(players[2])
+    hpBarUpdate(players[3])
 
 })
 loadBtn[2].addEventListener("click", (event) => {
     event.preventDefault()
     setNumberOfPlayers(+save3.numberOfPlayers);
     startInfluence = save3.startInfluence;
-    playerOne.currentInfluence.value = save3.playerOne.influence;
-    playerTwo.currentInfluence.value = save3.playerTwo.influence;
-    playerThree.currentInfluence.value = save3.playerThree.influence;
-    playerFour.currentInfluence.value = save3.playerFour.influence;
+    players[0].currentInfluence.value = save3.players[0].influence;
+    players[1].currentInfluence.value = save3.players[1].influence;
+    players[2].currentInfluence.value = save3.players[2].influence;
+    players[3].currentInfluence.value = save3.players[3].influence;
 
     playerNamesUpdate(save3.playersNames)
 
-    hpBarUpdate(playerOne);
-    hpBarUpdate(playerTwo)
-    hpBarUpdate(playerThree)
-    hpBarUpdate(playerFour)
+    hpBarUpdate(players[0]);
+    hpBarUpdate(players[1])
+    hpBarUpdate(players[2])
+    hpBarUpdate(players[3])
 
 })
 
