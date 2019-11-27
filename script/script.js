@@ -35,50 +35,22 @@ function playerNamesUpdate(playersNamesArray) {
 }
 playerNamesUpdate(playersNames);
 
-
+//Данные игроков
 class User {
-    constructor(playerNumber){
-        
+    constructor(name, influence, playersAddInfluenceInput, hpBarCurrent, btnSendResults, oldParam){
+        this.name = name,
+        this.currentInfluence = influence,
+        this.addInfluence = playersAddInfluenceInput,
+        this.influenceBar = hpBarCurrent,
+        this.btnSendResults = btnSendResults,
+        this.oldParam = oldParam;
     }
 }
 
-//Данные игроков
-let playerOne = {
-    name: playersNames[0],
-    currentInfluence: influence[0],
-    addInfluence: playersAddInfluenceInput[0],
-    influenceBar: hpBarCurrent[0],
-    btnSendResults: sendResults[0],
-    oldParam: startInfluence
-
-}
-let playerTwo = {
-    name: playersNames[1],
-    currentInfluence: influence[1],
-    addInfluence: playersAddInfluenceInput[1],
-    influenceBar: hpBarCurrent[1],
-    btnSendResults: sendResults[1],
-    oldParam: startInfluence
-
-}
-let playerThree = {
-    name: playersNames[2],
-    currentInfluence: influence[2],
-    addInfluence: playersAddInfluenceInput[2],
-    influenceBar: hpBarCurrent[2],
-    btnSendResults: sendResults[2],
-    oldParam: startInfluence
-
-}
-let playerFour = {
-    name: playersNames[3],
-    currentInfluence: influence[3],
-    addInfluence: playersAddInfluenceInput[3],
-    influenceBar: hpBarCurrent[3],
-    btnSendResults: sendResults[3],
-    oldParam: startInfluence
-
-}
+let playerOne = new User(playersNames[0], influence[0], playersAddInfluenceInput[0], hpBarCurrent[0], sendResults[0]);
+let playerTwo = new User(playersNames[1], influence[1], playersAddInfluenceInput[1], hpBarCurrent[1], sendResults[1]);
+let playerThree = new User(playersNames[2], influence[2], playersAddInfluenceInput[2], hpBarCurrent[2], sendResults[2]);
+let playerFour = new User(playersNames[3], influence[3], playersAddInfluenceInput[3], hpBarCurrent[3], sendResults[3]);
 
 function colorHpBars(hpBars) {
     for (let i = 0; i < hpBars.length; i++) {
@@ -169,6 +141,10 @@ function logUpdate(type, player) {
 }
 
 function hpBarUpdate(player) {
+    if (player === 'all'){
+        
+    }
+
     if ((player.currentInfluence.value / startInfluence) >= 1) {
         player.influenceBar.style.background = "darkblue";
     } else if ((player.currentInfluence.value / startInfluence) >= 0.7 && (player.currentInfluence.value / startInfluence) < 1) {
@@ -191,111 +167,72 @@ let save2 = JSON.parse(window.localStorage.getItem("save2"))
 let save3 = JSON.parse(window.localStorage.getItem("save3"))
 
 // Проверка на сохранения
-if ( !(save1) ){
-    savesSlots[0].textContent = "Пустой слот";
-} else {
-    let saveDate = new Date(save1.nowDate)
-    savesSlots[0].textContent = `Дата сохранения: ${saveDate.getHours()}:${saveDate.getMinutes()}:${saveDate.getSeconds()}. Игроки: ${save1.playersNames}`;
-}
-if ( !(save2) ){
-    savesSlots[1].textContent = "Пустой слот";
-} else {
-    let saveDate = new Date(save2.nowDate)
-    savesSlots[1].textContent = `Дата сохранения: ${saveDate.getHours()}:${saveDate.getMinutes()}:${saveDate.getSeconds()}. Игроки: ${save2.playersNames}`;
+
+function checkSave(save, slotNum){
+    if ( !(save) ){
+        savesSlots[slotNum].textContent = "Пустой слот";
+    } else {
+        let saveDate = new Date(save.nowDate)
+        savesSlots[slotNum].textContent = `Дата сохранения: ${saveDate.getHours()}:${saveDate.getMinutes()}:${saveDate.getSeconds()}. Игроки: ${save.playersNames}`;
+    }
 }
 
-if ( !(save3) ){
-    savesSlots[2].textContent = "Пустой слот";
-} else {
-    saveDate = new Date(save3.nowDate)
-    savesSlots[2].textContent = `Дата сохранения: ${saveDate.getHours()}:${saveDate.getMinutes()}:${saveDate.getSeconds()}. Игроки: ${save3.playersNames}`;
-}
+checkSave(save1, 0);
+checkSave(save2, 1);
+checkSave(save3, 2);
 
+
+class SavePlayerInfo{
+    constructor(){
+        this.playerOne = {
+            influence: playerOne.currentInfluence.value,
+            name: playerOne.name
+        },
+        this.playerTwo = {
+            influence: playerTwo.currentInfluence.value,
+            name: playerTwo.name
+        },
+        this.playerThree = {
+            influence: playerThree.currentInfluence.value,
+            name: playerThree.name
+        },
+        this.playerFour = {
+            influence: playerFour.currentInfluence.value,
+            name: playerFour.name
+        },
+        this.numberOfPlayers = numberOfPlayers,
+        this.startInfluence = startInfluence,
+        this.playersNames = playersNames,
+        this.nowDate = new Date();
+    }
+}
 
 // Сохранение
 saveBtn[0].addEventListener("click", (event) => {
     event.preventDefault();
-    let save1 = {
-        playerOne: {
-            influence: playerOne.currentInfluence.value,
-            name: playerOne.name
-        },
-        playerTwo: {
-            influence: playerTwo.currentInfluence.value,
-            name: playerTwo.name
-        },
-        playerThree: {
-            influence: playerThree.currentInfluence.value,
-            name: playerThree.name
-        },
-        playerFour: {
-            influence: playerFour.currentInfluence.value,
-            name: playerFour.name
-        },
-        numberOfPlayers: numberOfPlayers,
-        startInfluence: startInfluence,
-        playersNames: playersNames,
-        nowDate: new Date()
-    };
+    let save1 = SavePlayerInfo();
     window.localStorage.setItem("save1", JSON.stringify(save1));
 });
 
 saveBtn[1].addEventListener("click", (event) => {
     event.preventDefault();
-    let save1 = {
-        playerOne: {
-            influence: playerOne.currentInfluence.value,
-            name: playerOne.name
-        },
-        playerTwo: {
-            influence: playerTwo.currentInfluence.value,
-            name: playerTwo.name
-        },
-        playerThree: {
-            influence: playerThree.currentInfluence.value,
-            name: playerThree.name
-        },
-        playerFour: {
-            influence: playerFour.currentInfluence.value,
-            name: playerFour.name
-        },
-        numberOfPlayers: numberOfPlayers,
-        startInfluence: startInfluence,
-        playersNames: playersNames,
-        nowDate: new Date()
-
-    };
+    let save1 = new SavePlayerInfo();
     window.localStorage.setItem("save2", JSON.stringify(save1));
 });
 
 saveBtn[2].addEventListener("click", (event) => {
     event.preventDefault();
-    let save1 = {
-        playerOne: {
-            influence: playerOne.currentInfluence.value,
-            name: playerOne.name
-        },
-        playerTwo: {
-            influence: playerTwo.currentInfluence.value,
-            name: playerTwo.name
-        },
-        playerThree: {
-            influence: playerThree.currentInfluence.value,
-            name: playerThree.name
-        },
-        playerFour: {
-            influence: playerFour.currentInfluence.value,
-            name: playerFour.name
-        },
-        numberOfPlayers: numberOfPlayers,
-        startInfluence: startInfluence,
-        playersNames: playersNames,
-        nowDate: new Date()
-
-    };
+    let save1 = new SavePlayerInfo();
     window.localStorage.setItem("save3", JSON.stringify(save1));
 });
 
+function loadSave(save){
+    startInfluence = save.startInfluence;
+    playerOne.currentInfluence.value = save.playerOne.influence;
+    playerTwo.currentInfluence.value = save.playerTwo.influence;
+    playerThree.currentInfluence.value = save.playerThree.influence;
+    playerFour.currentInfluence.value = save.playerFour.influence;
+}
 
 loadBtn[0].addEventListener("click", (event) => {
     event.preventDefault()
