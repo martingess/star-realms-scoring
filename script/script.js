@@ -71,22 +71,44 @@ players[3].currentInfluence.value = startInfluence;
 
 
 //листнеры для кнопок подсчёта
-for (i = 0; i<4; i++){
-    players[i].btnSendResults.addEventListener('click', (event) => {
-        event.preventDefault();
-        makeResult(players[i]);
-    });
-}
+// for (i = 0; i<4; i++){
+//     players[i].btnSendResults.addEventListener('click', (event) => {
+//         event.preventDefault();
+//         makeResult(players[i]);
+//     });
+// }
+
+players[0].btnSendResults.addEventListener('click', (event) => {
+    event.preventDefault();
+    makeResult(players[0]);
+});
+
+
+players[1].btnSendResults.addEventListener('click', (event) => {
+    event.preventDefault();
+    makeResult(players[1]);
+});
+
+players[2].btnSendResults.addEventListener('click', (event) => {
+    event.preventDefault();
+    makeResult(players[2]);
+});
+
+players[3].btnSendResults.addEventListener('click', (event) => {
+    event.preventDefault();
+    makeResult(players[3]);
+});
+
+
 
 //вернуть старые результаты лиснтеры
-for (i = 0; i<4; i++){
+for (i = 0; i < 4; i++) {
     returnOldBtns[i].addEventListener("click", function (event) {
         event.preventDefault();
         returnOld(players[i]);
         hpBarUpdate(players[i])
-    })
+    });
 }
-
 
 function returnOld(player) {
     let tempOldParam = player.currentInfluence.value;
@@ -111,9 +133,9 @@ function logUpdate(type, player) {
     if (type == 'afterChange') {
         logOutput = `${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}: Влияние игрока ${player.name} изменилось на ${player.addInfluence.value} <br>`;
     } else if (type == 'returnOld') {
-        logOutput = `${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}: влияние игрока ${player.name} возвращено к значению ${player.currentInfluence.value} (раньше было ${player.oldParam}) <br>`
+        logOutput = `${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}: влияние игрока ${player.name} возвращено к значению ${player.currentInfluence.value} (раньше было ${player.oldParam}) <br>`;
     } else if (type == "begin") {
-        logOutput = `<p> ${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}: кол-во игроков: ${numberOfPlayers}, стартовое влияние: ${startInfluence}`
+        logOutput = `<p> ${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}: кол-во игроков: ${numberOfPlayers}, стартовое влияние: ${startInfluence}`;
     }
 
     log.insertAdjacentHTML("afterbegin", logOutput);
@@ -121,7 +143,7 @@ function logUpdate(type, player) {
 
 function hpBarUpdate(player) {
     if (player === 'all') {
-        for(let i = 0; i<4; i++){
+        for (let i = 0; i < 4; i++) {
             barUpdate(players[i]);
         }
     } else {
