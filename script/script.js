@@ -216,7 +216,7 @@ class SavePlayerInfo {
 // Сохранение
 saveBtn[0].addEventListener("click", (event) => {
     event.preventDefault();
-    let save1 = SavePlayerInfo();
+    let save1 = new SavePlayerInfo();
     window.localStorage.setItem("save1", JSON.stringify(save1));
 });
 
